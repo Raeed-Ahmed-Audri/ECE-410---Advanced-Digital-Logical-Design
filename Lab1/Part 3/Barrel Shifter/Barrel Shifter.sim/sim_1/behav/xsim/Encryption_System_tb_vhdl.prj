@@ -1,0 +1,11 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../../Part 2/Comparator_XOR/Comparator_XOR.srcs/sources_1/new/Comparator.vhd" \
+"../../../../Barrel Shifter.srcs/sources_1/new/barrelShifter.vhd" \
+"../../../../../../Part 2/Comparator_XOR/Comparator_XOR.srcs/sources_1/new/XOR_Encryption.vhd" \
+"../../../../../../Part 2/Comparator_XOR/Comparator_XOR.srcs/sources_1/new/XOR_Decryption.vhd" \
+"../../../../Barrel Shifter.srcs/sources_1/new/encryption_System.vhd" \
+"../../../../Barrel Shifter.srcs/sources_1/new/Encryption_System_Testbench.vhd" \
+
+# Do not sort compile order
+nosort
