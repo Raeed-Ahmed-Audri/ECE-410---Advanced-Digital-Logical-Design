@@ -1,0 +1,9 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Comparator_XOR.srcs/sources_1/new/Comparator.vhd" \
+"../../../../../../Part 1/project_1.srcs/sources_1/new/XOR_Encryption.vhd" \
+"../../../../../../Part 1/project_1.srcs/sources_1/new/XOR_Decryption.vhd" \
+"../../../../Comparator_XOR.srcs/sources_1/new/Comparator_Testbench.vhd" \
+
+# Do not sort compile order
+nosort

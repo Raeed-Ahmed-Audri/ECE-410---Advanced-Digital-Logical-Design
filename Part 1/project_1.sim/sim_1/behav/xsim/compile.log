@@ -1,0 +1,6 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Audri/project_1/project_1.srcs/sources_1/new/XOR_Decryption.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'XOR_Decryption'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Audri/project_1/project_1.srcs/sources_1/new/XOR_Encryption.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'XOR_Encryption'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Audri/project_1/project_1.srcs/sources_1/new/XOR_Testbench.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'XOR_Testbench'
