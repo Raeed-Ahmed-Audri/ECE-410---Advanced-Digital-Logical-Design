@@ -1,0 +1,84 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity top_level is
+    Port (
+        reset       : in  STD_LOGIC;
+        sysclk      : in  STD_LOGIC;
+        lfsr_out    : out STD_LOGIC_VECTOR(7 downto 0);  -- Output from LFSR
+        seg_display : out STD_LOGIC_VECTOR(6 downto 0)   -- Output to 7-segment display
+    );
+end top_level;
+
+architecture Behavioral of top_level is
+    -- Clock divider signal to slow down system clock to 2 Hz
+    signal clk_2hz       : STD_LOGIC := '0';
+    signal clk_counter   : INTEGER := 0;
+    constant SYSCLK_FREQ : INTEGER := 100_000_000;  -- Assuming 100 MHz clock on Zybo
+    constant TARGET_FREQ : INTEGER := 2;
+    constant DIVISOR     : INTEGER := SYSCLK_FREQ / (2 * TARGET_FREQ); -- For 2Hz clock
+
+    -- Signals for LFSR
+    signal lfsr_data     : STD_LOGIC_VECTOR(7 downto 0) := (others => '1');
+    signal lfsr_custom   : STD_LOGIC_VECTOR(7 downto 0) := (others => '1');
+
+    -- Component declaration for LFSR
+    component LFSR
+        Generic ( LFSR_WIDTH : integer := 8 );
+        Port (
+            reset       : in  STD_LOGIC;
+            clk         : in  STD_LOGIC;
+            data_out    : buffer STD_LOGIC_VECTOR (LFSR_WIDTH - 1 downto 0);
+            custom_out  : buffer STD_LOGIC_VECTOR (LFSR_WIDTH - 1 downto 0)
+        );
+    end component;
+
+    -- Component declaration for 7-segment display driver
+    component display_driver
+        Port (
+            digits        : in STD_LOGIC_VECTOR(7 downto 0);  -- Input digits (2 hex)
+            clock         : in STD_LOGIC;
+            segments      : out STD_LOGIC_VECTOR(6 downto 0)  -- Segments for 7-segment display
+        );
+    end component;
+
+begin
+
+    -- Clock divider process to generate 2 Hz clock
+    clock_divider: process(sysclk)
+    begin
+        if rising_edge(sysclk) then
+            if clk_counter < DIVISOR then
+                clk_counter <= clk_counter + 1;
+            else
+                clk_counter <= 0;
+                clk_2hz <= not clk_2hz;
+            end if;
+        end if;
+    end process;
+
+    -- Instantiate the LFSR
+    lfsr_instance : LFSR
+        generic map (
+            LFSR_WIDTH => 8
+        )
+        port map (
+            reset      => reset,
+            clk        => clk_2hz,
+            data_out   => lfsr_data,
+            custom_out => lfsr_custom
+        );
+
+    -- Instantiate the 7-segment display driver
+    display_driver_instance : display_driver
+        port map (
+            digits   => lfsr_data,
+            clock    => clk_2hz,  -- Use the 2 Hz clock for display refresh
+            segments => seg_display
+        );
+
+    -- Assign the LFSR output to top-level output
+    lfsr_out <= lfsr_data;
+
+end Behavioral;
