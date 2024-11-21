@@ -24,9 +24,6 @@ ARCHITECTURE behavior OF datapath_tb IS
     SIGNAL rf_mode    : STD_LOGIC := '0';
     SIGNAL rf_address : STD_LOGIC_VECTOR(2 DOWNTO 0) := "000";
     
-    Signal test_rf_out : STD_LOGIC_VECTOR(15 DOWNTO 0);    
-    Signal test_acc0_out : STD_LOGIC_VECTOR(15 DOWNTO 0);
-    
     -- Clock period constant
     CONSTANT clk_period : TIME := 10 ns;
 
@@ -47,9 +44,7 @@ BEGIN
             rf_mode    => rf_mode,
             rf_address => rf_address,
             acc_mux_sel => acc_mux_sel,
-            alu_mux_sel => alu_mux_sel,      
-            test_rf_out=> test_rf_out,
-            test_acc0_out => test_acc0_out
+            alu_mux_sel => alu_mux_sel      
         );
 
 

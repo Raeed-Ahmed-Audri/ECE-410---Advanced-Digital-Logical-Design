@@ -33,9 +33,7 @@ ENTITY datapath IS
            rf_mode     : IN STD_LOGIC := '0';                       -- Register file mode
            rf_address  : IN STD_LOGIC_VECTOR(2 DOWNTO 0) := "000";  -- Register file address
            acc_mux_sel : IN STD_LOGIC;
-           alu_mux_sel : IN STD_LOGIC;
-           test_rf_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
-           test_acc0_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0')
+           alu_mux_sel : IN STD_LOGIC
           
          );
 END datapath;
@@ -52,13 +50,6 @@ ARCHITECTURE Structural OF datapath IS
     SIGNAL mux_out     : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL alu_mux_out : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL acc_mux_out : STD_LOGIC_VECTOR(15 DOWNTO 0);
---    SIGNAL alu_sel     : STD_LOGIC_VECTOR(3 DOWNTO 0) := "0001"; -- Example operation
- 
---    SIGNAL mux_sel_4   : STD_LOGIC_VECTOR(1 DOWNTO 0) := "00";   -- 4-to-1 MUX selector
---    SIGNAL acc_write   : STD_LOGIC := '1';                       -- Accumulator write enable
---    SIGNAL rf_write    : STD_LOGIC := '1';                       -- Register file write enable
---    SIGNAL rf_mode     : STD_LOGIC := '0';                       -- Register file mode
---    SIGNAL rf_address  : STD_LOGIC_VECTOR(2 DOWNTO 0) := "000";  -- Register file address
     ---------------------------------------------------------------------------
 
     -- Component Declarations
@@ -199,7 +190,5 @@ BEGIN
                    buffer_output => result
                  );
 
-    test_rf_out <= rf0_out;
-    test_acc0_out <= acc0_out;
 END Structural;
 
