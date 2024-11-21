@@ -77,7 +77,7 @@ BEGIN
         ASSERT (rf1_out = "0000000000000000") REPORT "Error: rf1_out should be 0000000000000000 in single access mode" SEVERITY ERROR;
 
         -- Test double access mode
-        rf_mode    <= '0';                -- Switch to double access mode
+        rf_mode    <= '1';                -- Switch to double access mode
         rf_address <= "001";              -- Address 1
         rf0_in     <= "0000000000000011"; -- Input value for rf0
         rf1_in     <= "0000000000000100"; -- Input value for rf1

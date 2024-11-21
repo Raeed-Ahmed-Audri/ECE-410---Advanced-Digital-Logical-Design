@@ -75,15 +75,19 @@ BEGIN
         reset <= '0';
 
         -- Test different ALU operations by changing alu_sel and providing inputs
-        rf_write <= '1';          -- Enable write to register file
-        rf_address <= "000";      -- Write to address 0
-        acc0_write <= '1';         -- Enable write to accumulator
+
 
         -- Load values into register file and test ALU addition
+        acc0_write <= '1';         -- Enable write to accumulator   
         user_input <= x"0003";
         mux_sel_4 <= "11";  
         WAIT FOR clk_period;
-        acc0_write <= '0';         
+        acc0_write <= '0';     
+        
+        rf_write <= '1';          -- Enable write to register file
+        rf_address <= "000";      -- Write to address 0
+        WAIT FOR clk_period;  
+          
         rf_write <= '0';
         
         
@@ -96,6 +100,13 @@ BEGIN
         -- Test ALU addition
         alu_sel <= "0101";        -- ALU addition operation
         alu_mux_sel <= '1';         -- Select register outputs
+
+
+        mux_sel_4 <= "00";
+        acc0_write <= '1';
+        WAIT FOR clk_period;
+        acc0_write <= '0';
+        
 
         output_en <= '1';         -- Enable output
         

@@ -61,11 +61,11 @@ BEGIN
                     registers(to_integer(unsigned(rf_address))) <= rf0_in;
                 ELSE -- Double access mode
                     IF to_integer(unsigned(rf_address)) <= 3 THEN
-                        rf0_aux <= registers(to_integer(unsigned(rf_address)));
-                        rf1_aux <= registers(to_integer(unsigned(rf_address) + 4)); -- Accessing the second register
+                        registers(to_integer(unsigned(rf_address))) <= rf0_in;
+                        registers(to_integer(unsigned(rf_address) + 4)) <= rf1_in; -- Accessing the second register
                     ELSE
-                        rf0_aux <= registers(to_integer(unsigned(rf_address)));
-                        rf1_aux <= registers(to_integer(unsigned(rf_address) - 4)); -- Accessing the second register
+                        registers(to_integer(unsigned(rf_address))) <= rf0_in;
+                        registers(to_integer(unsigned(rf_address) - 4)) <= rf1_in; -- Accessing the second register
                     END IF;
                 END IF;
             END IF;
